@@ -1,34 +1,57 @@
+// Vueファイルはビルド時にcomponentのオブジェクトとしてjsに読み込まれる
 <template>
   <div>
-    <LikeHeader></LikeHeader>
-    <h2>{{ number }}</h2>
-    <LikeNumber :total-number="number" @my-click="incrementNumber"></LikeNumber>
-    <LikeNumber :total-number="number"></LikeNumber>
+    <Header></Header>
   </div>
 </template>
 
 <script>
-import LikeHeader from "./components/LikeHeader.vue"
+import Header from "./components/Header.vue"
 
 export default {
   data(){
     return {
-      number: 14
     };
   },
   components: {
-    LikeHeader
+    Header,
   },
   methods: {
-    incrementNumber(value) {
-      this.number = value
-    }
   }
 };
 </script>
 
 <style scoped>
-  div {
-    border: 1px solid blue
+  * {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: 'RocknRoll One', sans-serif;
+  }
+
+  html, body, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, dd, p, div, span, img, a, table, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: normal;
+    font-size: 100%;
+    vertical-align: baseline;
+  }
+
+  header, footer, nav, section, article, aside, figure, figcaption {
+    display: block;
+  }
+
+  body {
+    line-height: 1;
+  }
+
+  ol, ul {
+    list-style: none;
+    list-style-type: none;
+  }
+
+  *, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
   }
 </style>
