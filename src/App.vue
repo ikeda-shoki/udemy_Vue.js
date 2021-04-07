@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Header from "./components/Header.vue"
+
 
 export default {
   data(){
@@ -14,14 +14,11 @@ export default {
     };
   },
   components: {
-    Header,
   },
-  methods: {
-  }
 };
 </script>
 
-<style scoped>
+<style>
   * {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -33,7 +30,7 @@ export default {
     padding: 0;
     border: 0;
     font-weight: normal;
-    font-size: 100%;
+    font-size: 16px;
     vertical-align: baseline;
   }
 
@@ -43,6 +40,7 @@ export default {
 
   body {
     line-height: 1;
+    background-color: #f5ece4;
   }
 
   ol, ul {
@@ -53,5 +51,12 @@ export default {
   *, *:before, *:after {
     -webkit-box-sizing: border-box;
     box-sizing: border-box
+  }
+
+  .container {
+    width: 90%;
+    max-width: 1080px;
+    margin: 0 auto;
+    position: relative;
   }
 </style>
