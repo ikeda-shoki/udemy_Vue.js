@@ -1,11 +1,22 @@
 <template>
-  <div class="overray" :id="modalName">
+  <div class="overray">
     <div class="modal">
       <div class="modal-header">
         <h3 class="modal-header-title">{{ modalTitles }}</h3>
         <p class="modal-header-sub-title">{{ modalSubTitles }}</p>
       </div>
       <div class="modal-body">
+        <!-- name属性を指定することで親コンポーネントでv-slotで指定した引数のテンプレートを描画できる -->
+        <slot name="header-content">
+          <!-- 親コンポーネントからslotが送られてこない時は下記の内容がデフォルトとして表示される -->
+          現在の新しい情報はありません
+        </slot>
+        <p class="modal-body-subtitile">途中経過</p>
+        <!-- 下記のname属性を指定していないslotは親コンポーネントのタグ内のtemplateタグ以外の部分が全て描写される -->
+        <!-- 下記の場合は親コンポーネントに何も記載がないため下記slot内のデフォルトの内容が描画されている -->
+        <slot>
+          現在の新しい情報はありません
+        </slot>
       </div>
       <div class="modal-footer">
         <button @click="modalClose">閉じる</button>
@@ -36,9 +47,6 @@
       modalSubTitles: {
         type: String
       },
-      modalName: {
-        type: String
-      }
     },
     // ファイル名やコンポーネントは単語の初めが大文字(パスカルケース)、propsはvueではキャメルケース(繋がる単語の先頭を大文字)、HTMLではケバブケース(ハイフンで繋ぐ)
   }
@@ -72,6 +80,23 @@
   .modal-header-sub-title {
     text-align: center;
     margin: 20px 0;
+  }
+
+  .modal-body-lists {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-body-list {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    border-bottom: solid 1px #afa7a4;
+  }
+
+  .modal-body-subtitile {
+    margin: 40px 0 20px;
+    text-align: center;
   }
 
   .modal-footer {

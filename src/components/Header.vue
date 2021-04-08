@@ -13,7 +13,17 @@
       </div>
     </div>
     <!-- 親コンポーネントではpropsは属性として受け取る、属性がデータの送り口 -->
-    <Modal @modal-status="modalClose" modal-name="notificatons" modal-titles= "お知らせ" modal-sub-titles="3日前までのお知らせ" :aria-hidden="isShow ? true : false"></Modal>
+    <Modal @modal-status="modalClose" modal-titles= "お知らせ" modal-sub-titles="3日前までのお知らせ" :aria-hidden="isShow ? true : false">
+      <!-- 子コンポーネントにHTMLタグを含んだテンプレートを送ることが可能 -->
+      <!-- 名前付きslot:下記のようにtemplateタグを用意し、そこでv-slot:引数(好き名前)を定義することで子コンポーネントで指定した場所にname属性を持ったtemplateを定義できる -->
+      <template v-slot:header-content>
+        <ul class="modal-body-lists">
+          <li class="modal-body-list">1個目のお知らせです</li>
+          <li class="modal-body-list">2個目のお知らせです</li>
+          <li class="modal-body-list">3個目のお知らせです</li>
+        </ul>
+      </template>
+    </Modal>
   </header>
 </template>
 
@@ -39,8 +49,8 @@ export default {
     modalOpen() {
       this.isShow = false
     },
-    modalClose() {
-      this.isShow = true
+    modalClose(status) {
+      this.isShow = status
     },
   }
 }
