@@ -7,7 +7,7 @@
       </div>
       <div class="modal-body">
         <!-- name属性を指定することで親コンポーネントでv-slotで指定した引数のテンプレートを描画できる -->
-        <slot name="header-content">
+        <slot name="modal-news">
           <!-- 親コンポーネントからslotが送られてこない時は下記の内容がデフォルトとして表示される -->
           現在の新しい情報はありません
         </slot>

@@ -2,11 +2,14 @@
 <template>
   <div>
     <Header></Header>
+    <div class="container">
+      <Tab></Tab>
+    </div>
   </div>
 </template>
 
 <script>
-
+import Tab from './components/Tab.vue'
 
 export default {
   data(){
@@ -14,6 +17,7 @@ export default {
     };
   },
   components: {
+    Tab,
   },
 };
 </script>
