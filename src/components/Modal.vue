@@ -6,11 +6,17 @@
         <p class="modal-header-sub-title">{{ modalSubTitles }}</p>
       </div>
       <div class="modal-body">
-        <!-- name属性を指定することで親コンポーネントでv-slotで指定した引数のテンプレートを描画できる -->
-        <slot name="modal-news">
-          <!-- 親コンポーネントからslotが送られてこない時は下記の内容がデフォルトとして表示される -->
-          現在の新しい情報はありません
-        </slot>
+        <ul class="modal-body-lists">
+          <!-- name属性を指定することで親コンポーネントでv-slotで指定した引数のテンプレートを描画できる -->
+          <slot name="modal-news" v-if="modalType === 'news'">
+            <!-- 親コンポーネントからslotが送られてこない時は下記の内容がデフォルトとして表示される -->
+            現在の新しい情報はありません
+          </slot>
+          <slot name="modal-topics" v-if="modalType === 'topics'">
+            <!-- 親コンポーネントからslotが送られてこない時は下記の内容がデフォルトとして表示される -->
+            現在の新しいトピックはありません
+          </slot>
+        </ul>
         <p class="modal-body-subtitile">途中経過</p>
         <!-- 下記のname属性を指定していないslotは親コンポーネントのタグ内のtemplateタグ以外の部分が全て描写される -->
         <!-- 下記の場合は親コンポーネントに何も記載がないため下記slot内のデフォルトの内容が描画されている -->
@@ -45,8 +51,11 @@
       },
       // propsを複数使用する場合は、下記のようにオブジェクトにして渡す
       modalSubTitles: {
-        type: String
+        type: String,
       },
+      modalType: {
+        type: String,
+      }
     },
     // ファイル名やコンポーネントは単語の初めが大文字(パスカルケース)、propsはvueではキャメルケース(繋がる単語の先頭を大文字)、HTMLではケバブケース(ハイフンで繋ぐ)
   }

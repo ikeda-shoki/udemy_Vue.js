@@ -8,7 +8,10 @@
     <div class="tab-main">
       <!-- 動的コンポーネントは:is="データ名"を使用することでそのデータ名のコンポーネントを呼び出すことができる -->
       <!-- 指定したコンポーネントを切り替えが可能になる -->
-      <compornent :is="TabType" :tab-title="tabTitle"></compornent>
+      <!-- keep-aliveタグで動的コンポーネントを囲む場合、動的コンポーネントはコンポーネントを切り替える際に作り替えられない -->
+      <keep-alive>
+        <compornent :is="TabType"></compornent>
+      </keep-alive>
     </div>
   </div>
 </template>

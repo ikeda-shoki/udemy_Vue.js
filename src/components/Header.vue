@@ -5,7 +5,10 @@
         <HeaderTitle></HeaderTitle>
         <div class="header-lists">
           <ul>
-            <li @click="modalOpen">
+            <li @click="topicsModalOpen">
+              <i class="fas fa-external-link-square-alt header-list-item"></i>
+            </li>
+            <li @click="newsModalOpen">
               <i class="far fa-bell header-list-item bell"></i>
             </li>
           </ul>
@@ -13,15 +16,18 @@
       </div>
     </div>
     <!-- 親コンポーネントではpropsは属性として受け取る、属性がデータの送り口 -->
-    <Modal @modal-status="modalClose" modal-titles= "お知らせ" modal-sub-titles="3日前までのお知らせ" :aria-hidden="isShow ? true : false">
+    <Modal @modal-status="modalClose" modal-titles= "お知らせ" modal-sub-titles="3日前までのお知らせ" :modal-type="modalType" :aria-hidden="isShow ? true : false">
       <!-- 子コンポーネントにHTMLタグを含んだテンプレートを送ることが可能 -->
       <!-- 名前付きslot:下記のようにtemplateタグを用意し、そこでv-slot:引数(好き名前)を定義することで子コンポーネントで指定した場所にname属性を持ったtemplateを定義できる -->
       <template v-slot:modal-news>
-        <ul class="modal-body-lists">
-          <li class="modal-body-list" v-for="item in news" :key="item.message">
-            {{ item.message }}
-          </li>
-        </ul>
+        <li class="modal-body-list" v-for="item in news" :key="item.message">
+          {{ item.message }}
+        </li>
+      </template>
+      <template v-slot:modal-topics>
+        <li class="modal-body-list" v-for="item in topics" :key="item.message">
+          {{ item.message }}
+        </li>
       </template>
     </Modal>
   </header>
@@ -42,7 +48,14 @@ export default {
         { message: "1個目のお知らせです！" },
         { message: "2個目のお知らせです！" },
         { message: "3個目のお知らせです！" },
-      ]
+      ],
+      topics: [
+        { message: "1個目のトピックです！" },
+        { message: "2個目のトピックです！" },
+        { message: "3個目のトピックです！" },
+        { message: "4個目のトピックです！" },
+      ],
+      modalType: "",
     }
   },
   components: {
@@ -51,7 +64,12 @@ export default {
     Modal,
   },
   methods: {
-    modalOpen() {
+    topicsModalOpen() {
+      this.modalType = "topics"
+      this.isShow = false
+    },
+    newsModalOpen() {
+      this.modalType = "news"
       this.isShow = false
     },
     modalClose(status) {

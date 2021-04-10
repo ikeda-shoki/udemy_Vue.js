@@ -7,9 +7,6 @@ import TabHeader from './TabHeader'
 
 export default {
   props: {
-    tabTitle: {
-      type: String,
-    }
   },
   components: {
     TabHeader,
