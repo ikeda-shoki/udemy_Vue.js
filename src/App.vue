@@ -4,12 +4,14 @@
     <Header></Header>
     <div class="container">
       <Tab></Tab>
+      <Form></Form>
     </div>
   </div>
 </template>
 
 <script>
 import Tab from './components/Tab.vue'
+import Form from './components/Form/Form.vue'
 
 export default {
   data(){
@@ -18,6 +20,7 @@ export default {
   },
   components: {
     Tab,
+    Form,
   },
 };
 </script>
