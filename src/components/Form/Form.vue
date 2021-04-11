@@ -10,9 +10,11 @@
       <input type="text" id="title" v-model.lazy="eventData.name">
       <!-- preタグは入力された文字の空白や改行までしっかりと表示させるタグ -->
       <pre>{{ eventData.name }}</pre>
+      <FormText v-model.lazy="eventData.name" form-title="名前" form-type="text"></FormText>
     </div>
+
     <div class="form-item">
-      <FormEmail v-model.lazy="eventData.email"></FormEmail>
+      <FormText v-model.lazy="eventData.email" form-title="Email" form-type="text"></FormText>
       <!-- 上記のコンポーネントでv-modelを使用する際には要するに、:value = "eventData.email"
         @input =  "eventData.email = $event"このような形になっている。
         これを子コンポーネントでうまく利用する必要がある
@@ -23,12 +25,15 @@
       <!-- number修飾詞をつけることでinputに数字を入力する際、入力された後に形式がstringになることを防いでnumberのままになる -->
       <input type="number" id="maxNumber" v-model.number="eventData.maxNumber">
       <p>{{ typeof eventData.maxNumber }}人</p>
+      <FormText v-model.number="eventData.maxNumber" form-title="最大人数" form-type="number"></FormText>
     </div>
+
     <div class="form-item">
       <label for="host">主催者</label>
       <!-- trim修飾詞をつけることで頭とけつの空白を取ってしまう -->
       <input type="text" id="host" v-model.trim="eventData.host">
       <pre>{{ eventData.host }}</pre>
+      <FormText v-model.trim="eventData.host" form-title="主催者" form-type="text"></FormText>
     </div>
     <div class="form-item">
       <label for="detail">詳細</label>
@@ -79,7 +84,7 @@
 </template>
 
 <script>
-import FormEmail from './FormEmail'
+import FormText from './FormText'
 
 export default {
   data() {
@@ -99,7 +104,7 @@ export default {
     }
   },
   components: {
-    FormEmail,
+    FormText,
   },
   methods : {
   }
