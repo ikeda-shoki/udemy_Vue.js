@@ -40,6 +40,7 @@
       <!-- number修飾詞をつけることでinputに数字を入力する際、入力された後に形式がstringになることを防いでnumberのままになる -->
       <textarea type="text" id="detail" v-model="eventData.detail"></textarea>
       <pre>{{ eventData.detail }}</pre>
+      <FormTextArea v-model.trim="eventData.detail" form-title="詳細" form-type="text"></FormTextArea>
     </div>
     <div class="form-item">
       <label for="isPrivate">公開ステータス</label>
@@ -47,6 +48,7 @@
       <input type="checkbox" id="isPrivate" v-model="eventData.isPrivate" :checked="eventData.isPrivate">
       <p v-if="eventData.isPrivate === true">公開</p>
       <p v-else>非公開</p>
+      <FormCheckbox v-model="eventData.isPrivate" form-title="公開ステータス" :options="options"></FormCheckbox>
     </div>
     <div class="form-item">
       <label>参加条件</label>
@@ -85,6 +87,8 @@
 
 <script>
 import FormText from './FormText'
+import FormTextArea from './FormTextArea'
+import FormCheckbox from './FormCheckbox'
 
 export default {
   data() {
@@ -101,10 +105,15 @@ export default {
         price: "",
         location: "東京",
       },
+      options: [
+        { label: "", value: "1"},
+      ]
     }
   },
   components: {
     FormText,
+    FormTextArea,
+    FormCheckbox,
   },
   methods : {
   }
