@@ -48,7 +48,7 @@
       <input type="checkbox" id="isPrivate" v-model="eventData.isPrivate" :checked="eventData.isPrivate">
       <p v-if="eventData.isPrivate === true">公開</p>
       <p v-else>非公開</p>
-      <FormCheckbox v-model="eventData.isPrivate" form-title="公開ステータス" :options="options"></FormCheckbox>
+      <FormCheckbox v-model="eventData.isPrivate" form-title="公開ステータス"></FormCheckbox>
     </div>
     <div class="form-item">
       <label>参加条件</label>
@@ -61,6 +61,7 @@
       <label for="30">30代</label>
       <p v-if="eventData.target.length">{{ eventData.target }}</p>
       <p v-else>選択されていません</p>
+      <FormArrayCheckbox v-model="eventData.target" form-title="参加条件"></FormArrayCheckbox>
     </div>
     <div class="form-item">
       <label>参加費</label>
@@ -89,6 +90,7 @@
 import FormText from './FormText'
 import FormTextArea from './FormTextArea'
 import FormCheckbox from './FormCheckbox'
+import FormArrayCheckbox from './FormArrayCheckbox'
 
 export default {
   data() {
@@ -104,16 +106,14 @@ export default {
         target: [],
         price: "",
         location: "東京",
-      },
-      options: [
-        { label: "", value: "1"},
-      ]
+      }
     }
   },
   components: {
     FormText,
     FormTextArea,
     FormCheckbox,
+    FormArrayCheckbox
   },
   methods : {
   }

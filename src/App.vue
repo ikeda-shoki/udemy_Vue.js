@@ -5,6 +5,7 @@
     <div class="container">
       <Tab></Tab>
       <Form></Form>
+      <Home></Home>
     </div>
   </div>
 </template>
@@ -12,6 +13,7 @@
 <script>
 import Tab from './components/Tab.vue'
 import Form from './components/Form/Form.vue'
+import Home from './components/Home.vue'
 
 export default {
   data(){
@@ -21,6 +23,7 @@ export default {
   components: {
     Tab,
     Form,
+    Home,
   },
 };
 </script>

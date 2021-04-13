@@ -1,45 +1,26 @@
 <template>
-<div>
-  <label :for="formTitle">{{ formTitle }}</label>
-  <template v-for="(option, index) in options">
-    <label :key="index">
-      <input type="checkbox" :value="option.value" @change="updateValue">
-      {{ option.label }}
-    </label>
-  </template>
-  <p v-if="values === ['1']">公開</p>
-</div>
+  <div>
+    <label :for="formTitle">{{ formTitle }}</label>
+      <!-- eventリスナーのチェックボックス(boolean型)はcheckedで値を検知するので今までのvalueとは違う為、注意が必要 -->
+      <input type="checkbox" id="isPrivate" :value="value" :checked="value" @input="$emit('input', $event.target.checked)">
+      <p v-if="value === true">公開</p>
+      <p v-else>非公開</p>
+  </div>
 </template>
 
 <script>
 export default {
   props: {
-    options: {
-      type: Array,
-      required: true,
-    },
     formTitle: {
-      type: String,
+      type: String
     },
-  },
-  data() {
-    return {
-      values: []
-    }
-  },
-  methods: {
-    updateValue(e) {
-      if(e.target.checked) {
-        this.values.push(e.target.value);
-      } else {
-        this.values = this.values.filter(v => v !== e.target.value);
-      }
-      this.$emit("change", this.values);
+    value: {
+      type: Boolean,
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>
