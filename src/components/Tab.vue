@@ -1,4 +1,5 @@
 <template>
+  <!-- css animationを使用したvue.js -->
   <div class="tab">
     <ul class="tab-lists">
       <li v-for="item in tabLists" :key="item.tabList" class="tab-list" @click="TabType=item.tabList">
@@ -9,9 +10,11 @@
       <!-- 動的コンポーネントは:is="データ名"を使用することでそのデータ名のコンポーネントを呼び出すことができる -->
       <!-- 指定したコンポーネントを切り替えが可能になる -->
       <!-- keep-aliveタグで動的コンポーネントを囲む場合、動的コンポーネントはコンポーネントを切り替える際に作り替えられない -->
-      <keep-alive>
-        <compornent :is="TabType"></compornent>
-      </keep-alive>
+      <transition name="slide" appear>
+        <keep-alive>
+            <compornent :is="TabType"></compornent>
+        </keep-alive>
+      </transition>
     </div>
   </div>
 </template>
@@ -41,8 +44,31 @@ export default {
 </script>
 
 <style scoped>
+
+  .slide-enter {
+    transform: translate(-100px, 0);
+    opacity: 0;
+  }
+
+  .slide-enter-active {
+    transition: all 1s .5s ease;
+  }
+
+  .slide-leave {
+    transform: translate(0, 0);
+  }
+
+  .slide-leave-to {
+    transform: translate(100px, 0);
+  }
+
+  .slide-leave-active {
+    transition: all .5s ease;
+  }
+
   .tab {
     margin-top: 30px;
+    height: 200px;
   }
 
   .tab-lists {
@@ -60,5 +86,9 @@ export default {
 
   .tab-list:hover {
     opacity: 0.8;
+  }
+
+  .tab-component {
+    opacity: 0;
   }
 </style>

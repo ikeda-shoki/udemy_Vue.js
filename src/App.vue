@@ -29,6 +29,7 @@ export default {
 </script>
 
 <style>
+
   * {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;

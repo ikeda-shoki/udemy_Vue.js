@@ -45,6 +45,22 @@ Vue.directive("border", function(el, binding){
 //   // destroyのようなもの
 // },
 
+// filterの定義方法(グローバルフィルター)
+// Vue.filterを宣言し、引数を2つとる
+// 1つ目はいつものようにメソッド名、2つ目はメソッドの内容で下記の(value)はメソッドで変更する内容のこと
+// 下記でいうとupperCaseを定義した値が大文字になる定義した値は下記で言うとvalueのことを指している
+Vue.filter("upperCase", function(value) {
+  return value.toUpperCase();
+})
+
+// グローバルミックスインについて
+// グローバルミックスインは全てのファイルに有無を言わさず適応される為、使用するのには注意が必要
+// 作り方は下記を参照
+Vue.mixin({
+  created() {
+    console.log("global_mixIn")
+  }
+})
 
 new Vue({
   render: h => h(App),

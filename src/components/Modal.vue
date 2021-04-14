@@ -1,5 +1,5 @@
 <template>
-  <div class="overray">
+  <div class="overray" @click.self="modalClose">
     <div class="modal">
       <div class="modal-header">
         <h3 class="modal-header-title">{{ modalTitles }}</h3>
@@ -39,7 +39,7 @@
     },
     methods: {
       modalClose() {
-        this.$emit("modal-status", true)
+        this.$emit("modal-status", false)
       }
     },
     props: {
