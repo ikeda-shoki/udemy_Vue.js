@@ -83,36 +83,6 @@ export default {
 </script>
 
 <style scoped>
-/* transitionタグを定義した場合6つのname属性に関するものをstyleで定義する必要がある */
-/* css animationを使用する場合は全ての状態を記載する必要はない！
-なぜなら、@keyframsで始まりを終わりの状態を記載済みのため */
-  .fade-enter {
-    /* 現れる時の最初の状態 */
-    opacity: 0;
-  }
-  .fade-enter-active {
-    /* 現れる時のトランジションの状態 */
-    transition: opacity .8s;
-  }
-  /* ここから下 */
-  .fade-enter-to {
-    /* 現れる時の最後の状態 */
-    opacity: 1;
-  }
-  .fade-leave {
-    /* 消える時の最初の状態 */
-    opacity: 1;
-  }
-  /* ここから上はあってもなくても大丈夫 */
-  .fade-leave-active {
-    /* 消える時のトランジションの状態 */
-    transition: opacity .8s;
-  }
-  .fade-leave-to {
-    /* 消える時の最後の状態 */
-    opacity: 0;
-  }
-
   header {
     background-color: #e36962;
     height: 90px;
