@@ -11,17 +11,19 @@
       <!-- 簡単なアニメーションを作成する場合はクラス要素にanimate_animatedで読み込んだanimate.cssを使用することが可能 -->
       <!-- animate.cssはtransitionでも使用可能で、enter-active-class="animate__animated animate__bounce"のように記述すると
       enter-activeが上書きされ使用することが可能になる -->
-      <transition
-        name="slide"
-        mode="out-in"
-        appear>
-      <!-- 動的コンポーネントは:is="データ名"を使用することでそのデータ名のコンポーネントを呼び出すことができる -->
-      <!-- 指定したコンポーネントを切り替えが可能になる -->
-      <!-- keep-aliveタグで動的コンポーネントを囲む場合、動的コンポーネントはコンポーネントを切り替える際に作り替えられない -->
-        <keep-alive>
-            <compornent :is="TabType"></compornent>
-        </keep-alive>
-      </transition>
+      <div class="tab-content-top">
+        <transition
+          name="slide"
+          mode="out-in"
+          appear>
+        <!-- 動的コンポーネントは:is="データ名"を使用することでそのデータ名のコンポーネントを呼び出すことができる -->
+        <!-- 指定したコンポーネントを切り替えが可能になる -->
+        <!-- keep-aliveタグで動的コンポーネントを囲む場合、動的コンポーネントはコンポーネントを切り替える際に作り替えられない -->
+          <keep-alive>
+              <compornent :is="TabType"></compornent>
+          </keep-alive>
+        </transition>
+      </div>
       <button @click="show = !show">切り替え</button>
       <!-- transitionにmodeをつけることで前の要素が消えてから表示することができるのでアニメーションが滑らかになる -->
       <transition name="fade" mode="out-in">
@@ -31,6 +33,20 @@
         <p v-else key="hello">こんにちは</p>
       </transition>
       <br>
+        <button @click="add">追加</button>
+        <ul>
+          <!-- transition-groupは複数の要素を中に入れることが可能！ -->
+          <!-- また必ずkeyが必要になる -->
+          <!-- transition-groupは自動ではspanタグになる tag="div"などで変更可能 -->
+          <!-- transition modeはない -->
+          <!-- transition-groupにはv-move-class(7つ目のクラス)が存在する -->
+          <transition-group name="fade">
+            <!-- remove(index)を指定することで、削除する繰り返し要素を特定できる -->
+            <li v-for="(number, index) in numbers" :key="number" @click="remove(index)" style="cursor: pointer;">
+              {{ number }}
+            </li>
+          </transition-group>
+        </ul>
       <br>
       <!-- transitionでJavaScriptのアニメーションを作成する場合、8つのフックをもちこれをmethodsで定義することでアニメーションを作成することが可能である -->
       <!-- javascriptしか使用しない場合下記のような:css="false"を記述する -->
@@ -70,7 +86,9 @@ export default {
         { tabList: "About" },
       ],
       TabType: "News",
-      show: true
+      show: true,
+      numbers: [0, 1, 2],
+      nextNumber: 3,
     }
   },
   components: {
@@ -127,6 +145,19 @@ export default {
     //   // 消えるアニメーションがキャンセルされた時
     //   // v-showが適用されている場合だけ使用可能
     // },
+    // numbersの個数の間の整数をランダムで計算する 例)1~5 = 0~4までの数字かランダムで計算される例は動的に変化しても対応する
+    randomIndex() {
+      return Math.floor(Math.random() * this.numbers.length);
+    },
+    // numbersにnextNumberをpushしているようなもの、上記のランダムな位置に追加し、nextNumberを＋1している
+    add() {
+      this.numbers.splice(this.randomIndex(), 0, this.nextNumber);
+      this.nextNumber += 1;
+    },
+    // クリックしたindexを配列の中から削除している
+    remove(index){
+      this.numbers.splice(index, 1);
+    }
   }
 }
 </script>
@@ -158,6 +189,10 @@ export default {
   .tab {
     margin-top: 30px;
     height: 200px;
+  }
+
+  .tab-content-top {
+    height: 50px;
   }
 
   .tab-lists {

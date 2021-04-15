@@ -32,6 +32,13 @@ export default {
 /* transitionタグを定義した場合6つのname属性に関するものをstyleで定義する必要がある */
 /* css animationを使用する場合は全ての状態を記載する必要はない！
 なぜなら、@keyframsで始まりを終わりの状態を記載済みのため */
+  .fade-move {
+    /* vue.jsが勝手に動かしてくれている為、簡単に変更ができる */
+    /* transition: transform;はテンプレートで決まっている */
+    /* 消える動作を滑らかにする為には現在消えているDOMの上を通る必要がある為、DOMを浮かす必要がある。 */
+    /* それを実現するには消える要素を消えている状態のところにposition: absolute;を記載するとDOMが浮く */
+    transition: transform 1s;
+  }
   .fade-enter {
     /* 現れる時の最初の状態 */
     opacity: 0;
@@ -53,6 +60,7 @@ export default {
   .fade-leave-active {
     /* 消える時のトランジションの状態 */
     transition: opacity .8s;
+    position: absolute;
   }
   .fade-leave-to {
     /* 消える時の最後の状態 */
